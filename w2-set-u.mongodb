@@ -1,0 +1,69 @@
+use("test")
+
+// db.unicorns.find(
+//     {
+//         //selection
+//         "gender" : "m"
+//     },
+//     {
+//         //projection
+//         name: 1,
+//         _id: 0
+//     }
+// )
+
+//This returns any unicorn who loves 'apple' or 'carrot'.
+
+// db.unicorns.find({
+//     $or:[
+//         {
+//             loves : {$in : ["apple"]}
+//         },
+//         {
+//             loves : {$in : ["carrot"]}
+//         }    
+//     ]
+// })
+
+// db.unicorns.find({
+//     loves : {$in : ["apple", "carrot"]}
+// }).count()
+
+//The above will return all female unicorns which either love apple or weigh less than 500 pounds.
+
+// db.unicorns.find(
+//     {
+//         $and : [
+//             {
+//                 gender : "f",
+//             },
+//             {
+//                 $or:
+//                 [
+//                     {loves : {$in : ['apple']}},
+//                     {weight : {$lt:500}}
+//                 ]
+//             }
+//     ]
+//     }
+// )
+
+
+// Updating data
+// db.unicorns.update({name: 'Roooooodles'},
+// 	{weight: 590})
+
+// db.unicorns.update(
+//     {name: 'Roooooodles'},
+// 	{$set: {weight: 590}}
+// )
+
+// db.unicorns.find({}, {name: 1, _id : 0});
+
+//heaviest unicorns first
+// db.unicorns.find().sort({weight: 1})
+
+// find date
+db.unicorns.find({
+    "dob" : ISODate("1991-01-24T21:00:00.000Z")
+});
