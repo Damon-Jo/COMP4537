@@ -235,3 +235,24 @@ app.get('/api/v1/pokemonImage/:id', (req,res)=>{
     }
   })
 });
+
+// app.put('/api/v1/pokemon/:id')                   // - upsert a whole pokemon document
+app.put('/api/v1/pokemon/:id', (req, res)=>{
+  var inputId = req.params.id;
+  pokemonModel.findOne({id: inputId})
+  .then((doc)=>{
+    if (doc == null){
+      res.json({value:"Cast Error: pass pokemon id between 1 and 811"})
+    } else {
+
+      const filter = {id : inputId}
+      console.log(filter)
+      const update = {data : req.body}
+      console.log(update)
+
+      pokemonModel.findOneAndUpdate(filter, update, {
+        upsert: true
+      });      
+    }
+  })
+})
