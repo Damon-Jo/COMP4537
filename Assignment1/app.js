@@ -211,3 +211,27 @@ app.get('/api/v1/pokemon/:id', (req,res)=>{
       return res.status(500).json({status: "ServerErrror", errMsg: "Error : when getting a pokemon"})
     })
 });
+
+// app.get('/api/v1/pokemonImage/:id')              // - get a pokemon Image URL
+app.get('/api/v1/pokemonImage/:id', (req,res)=>{
+  var id = req.params.id;
+  var newId;
+
+  console.log(typeof id);
+  if (id.length == 1){
+    newId = '00' + id;
+  } else if(id.length == 2){
+    newId = '0' + id;
+  } else {
+    newId = id;
+  }
+
+  pokemonModel.findOne({id: id})
+  .then((doc)=>{
+    if (doc == null){
+      res.json({value:"Cast Error: pass pokemon id between 1 and 811"})
+    } else {
+      res.json({url:`https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/${newId}.png`})
+    }
+  })
+});
