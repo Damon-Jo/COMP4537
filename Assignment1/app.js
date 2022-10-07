@@ -196,7 +196,7 @@ app.post('/api/v1/pokemon', async (req,res)=>{
 
 // app.get('/api/v1/pokemon/:id')                   // - get a pokemon
 app.get('/api/v1/pokemon/:id', (req,res)=>{
-  const id = req.params.id;
+  var id = req.params.id;
   pokemonModel.findOne({id: id})
     .then((doc)=>{
 
@@ -256,3 +256,24 @@ app.put('/api/v1/pokemon/:id', (req, res)=>{
     }
   })
 })
+
+// app.patch('/api/v1/pokemon/:id')                 // - patch a pokemon document or a portion of the pokemon document
+
+// app.delete('/api/v1/pokemon/:id')                // - delete a  pokemon
+
+app.delete('/api/v1/pokemon/:id', (req,res)=>{
+  var id = parseInt(req.params.id);
+  pokemonModel.deleteOne({id:id}, function(err, result){
+    if (err) {
+      return res.json({errMsg: "Error : this pokemon id is not exist"});
+    } else {
+
+      if (result.deletedCount == 0){
+        return res.json({errMsg: "Error : this pokemon id is not exist"});
+      } else {
+        return res.json({msg: "Delete complited"});
+      }
+    }
+   
+  })
+}) 
