@@ -172,3 +172,25 @@ app.get('/api/v1/pokemons', function(req, res) {
       }
 })
 
+// app.post('/api/v1/pokemon')                      // - create a new pokemon
+app.post('/api/v1/pokemon', async (req,res)=>{
+  var pokemonDex = req.body
+  let product = await pokemonModel.exists({id: pokemonDex.id});
+
+  if(!pokemonDex){
+    return res.send('Invalid body');
+  }else if(product){
+    return res.status(200).json({ msg : "Error the id is duplicated"});
+  } else {
+    pokemonModel.create(pokemonDex)
+    .then((doc) => {
+      console.log('doc', doc)
+      return res.status(200).json({status: "Success", msg: "post complited",data: doc})
+    })
+    .catch((err) => {
+      console.log('err', err)
+      return res.status(500).json({status: "ServerErrror", errMsg: "Error encountered when creating a pokemon"})
+    })
+  }
+
+})
