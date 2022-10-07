@@ -192,5 +192,22 @@ app.post('/api/v1/pokemon', async (req,res)=>{
       return res.status(500).json({status: "ServerErrror", errMsg: "Error encountered when creating a pokemon"})
     })
   }
-
 })
+
+// app.get('/api/v1/pokemon/:id')                   // - get a pokemon
+app.get('/api/v1/pokemon/:id', (req,res)=>{
+  const id = req.params.id;
+  pokemonModel.findOne({id: id})
+    .then((doc)=>{
+
+      if (doc == null){
+        return res.status(200).json({ msg : "Error : pass pokemon id between 1 and 811"});
+        // res.json({value:"Cast Error: pass pokemon id between 1 and 811"})
+      } else {
+        res.json(doc)
+      }
+    })
+    .catch(err=>{
+      return res.status(500).json({status: "ServerErrror", errMsg: "Error : when getting a pokemon"})
+    })
+});
