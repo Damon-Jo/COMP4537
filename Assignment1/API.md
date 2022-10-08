@@ -1,7 +1,7 @@
 **COMP4537 Assigiment1 API Docs**
 ----
-  <h4>Kwanyong Jo </h4>
-  <h4>A01207367</h4>
+  <h3>Kwanyong Jo </h3>
+  <h3>A01207367</h3>
 
 * **URL**
 
@@ -13,8 +13,33 @@
   
   <_The request type_>
 
-  `GET` | `POST` | `DELETE` | `PUT`
-  
+  `GET` | `POST` | `PUT` | `PATCH` | `DELETE`
+
+   + app.get('/api/v1/pokemons?count=<number>&after=<number>')
+&nbsp;&nbsp; to get all the pokemons after the `after`. List only `count` number of pokemons
+
+
+   * app.post('/api/v1/pokemon')
+&nbsp;&nbsp; to create a new pokemon
+
+   * app.get('/api/v1/pokemon/:id')
+&nbsp;&nbsp; to get a pokemon by specific `id`
+
+   * app.get('/api/v1/pokemonImage/:id')
+&nbsp;&nbsp; to get a pokemon Image URL by specific `id`
+   
+   * app.put('/api/v1/pokemon/:id')
+&nbsp;&nbsp; to upsert a whole pokemon document by specific `id`
+
+   * app.patch('/api/v1/pokemon/:id')
+&nbsp;&nbsp; to patch a pokemon doc or portion of the pokemon doc by specific `id`   
+
+   * app.delete('/api/v1/pokemon/:id')
+&nbsp;&nbsp; to delete a pokemon by specific `id`
+
+
+
+
 *  **URL Params**
 
    <_If URL params exist, specify them in accordance with name mentioned in URL section. Separate into optional and required. Document data constraints._> 
