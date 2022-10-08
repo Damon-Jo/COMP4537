@@ -15,7 +15,7 @@
 
   `GET` | `POST` | `PUT` | `PATCH` | `DELETE`
 
-   + app.get('/api/v1/pokemons?count=<number>&after=<number>')
+   + app.get('/api/v1/pokemons?count=<number>&after=<number>')<br>
 &nbsp;&nbsp; to get all the pokemons after the `after`. List only `count` number of pokemons
 
 
@@ -40,13 +40,113 @@
 
 
 
-*  **URL Params**
+*  **schema rules**
+  * id <br>
+    > type : Number, unique : true
+  
+  * name <br>
+    > type : Object with following elements
+    > english, type:String, maxlength:20
+    > japanese, type:String,
+    > chinese, type:String,
+    > french, type:String,
+  * type <br>
+    > type : String Array from pokemonTypes enum
+  
+  * base <br>
+    > type : Object with following elements
+    > HP, type:Number,
+    > Attack, type:Number,
+    > Defense, type:Number,
+    > Sp. Attack, type:Number,
+    > Sp. Defense, type:Number,
+    > Speed, type:Number,
 
-   <_If URL params exist, specify them in accordance with name mentioned in URL section. Separate into optional and required. Document data constraints._> 
 
-   **Required:**
- 
-   `id=[integer]`
+*  **Sample Request and Responses**
+   * This is response of get request `app.get('/api/v1/pokemon/:id')`
+    <p>
+    {
+  "name": {
+    "english": "Bulbasaur",
+    "japanese": "フシギダネ",
+    "chinese": "妙蛙种子",
+    "french": "Bulbizarre"
+  },
+  "base": {
+    "Sp": {
+      " Attack": 65,
+      " Defense": 65
+    },
+    "HP": 45,
+    "Attack": 49,
+    "Defense": 49,
+    "Speed": 45
+  },
+  "_id": "6341dbc3b6f7ee4b228ca0e0",
+  "id": 1,
+  "type": [
+    "Grass",
+    "Poison"
+  ],
+  "__v": 0
+}
+    </p>
+  * This is response of get request `{{URL}}pokemons?count=2&after=10`
+  <p>
+[
+  {
+    "name": {
+      "english": "Metapod",
+      "japanese": "トランセル",
+      "chinese": "铁甲蛹",
+      "french": "Chrysacier"
+    },
+    "base": {
+      "Sp": {
+        " Attack": 25,
+        " Defense": 25
+      },
+      "HP": 50,
+      "Attack": 20,
+      "Defense": 55,
+      "Speed": 30
+    },
+    "_id": "6341dbc3b6f7ee4b228ca0ea",
+    "id": 11,
+    "type": [
+      "Bug"
+    ],
+    "__v": 0
+  },
+  {
+    "name": {
+      "english": "Butterfree",
+      "japanese": "バタフリー",
+      "chinese": "巴大蝶",
+      "french": "Papilusion"
+    },
+    "base": {
+      "Sp": {
+        " Attack": 90,
+        " Defense": 80
+      },
+      "HP": 60,
+      "Attack": 45,
+      "Defense": 50,
+      "Speed": 70
+    },
+    "_id": "6341dbc3b6f7ee4b228ca0eb",
+    "id": 12,
+    "type": [
+      "Bug",
+      "Flying"
+    ],
+    "__v": 0
+  }
+]
+  </p>
+
 
    **Optional:**
  
