@@ -1,8 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const https = require('https')
-const { get } = require('http')
-
 const app = express()
 const port = 5000
 
@@ -13,13 +11,8 @@ var pokemonModel;
 
 app.use(express.json())
 
-
-
-
-
 app.listen(process.env.PORT || port, async () => {
   try {
-    // mongoose.connect('mongodb+srv://lunaticky:rhanchd6@cluster0.rfmec.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
     mongoose.connect('mongodb+srv://lunaticky:rhanchd6@cluster0.rfmec.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'); 
 
   } catch (error) {
@@ -32,23 +25,17 @@ app.listen(process.env.PORT || port, async () => {
       data += chunk // aggregate data
     });
     res.on('end', () => {
-      // once data is completly fetched do JSON.parse();
       console.log('No more data in response.')
-      // pokemonTypes = JSON.parse(data);
       pokemonTypes = JSON.parse(data).map(type => {
         return type.english;
       })
-      // console.log(pokemonTypes)
     })
   }).on('error', (e) => {
     // listen for error 
     console.log(e.message);
   });
 
-
-
   const { Schema } = mongoose;
-
   const pokemonSchema = new Schema({
     "id": {
       type: Number,
@@ -114,20 +101,13 @@ app.listen(process.env.PORT || port, async () => {
       // });
     })
   })
-
-
-
-
   console.log(`Example app listening on port ${port}`)
 })
 
 
 // 1 - establish the connectino the db
-
 // 2 - create the schema
-
 // 3 - create the model
-
 // 4 - populate the db with pokemons
 
 app.get('/', (req, res) => {
@@ -151,7 +131,7 @@ app.get('/api/v1/pokemons', function(req, res) {
     .then((doc)=>{
 
       if (doc.length == 0){
-        return res.status(200).json({ msg : "Error : pass pokemon id between 1 and 811"});
+        return res.status(200).json({ errMsg : "Error : pass pokemon id between 1 and 811"});
         // res.json({value:"Cast Error: pass pokemon id between 1 and 811"})
       } else {
         console.timeLog(doc)
@@ -176,22 +156,28 @@ app.get('/api/v1/pokemons', function(req, res) {
 app.post('/api/v1/pokemon', async (req,res)=>{
   var pokemonDex = req.body
   let product = await pokemonModel.exists({id: pokemonDex.id});
+  var jsonLenth = parseInt(Object.keys(pokemonModel).length);
+  console.log(jsonLenth)
+  try{
+    if(!pokemonDex || jsonLenth != 17){
+      return res.send('Invalid body');
+    }else if(product){
+      return res.json({ msg : "Error the id is duplicated"});
+    } else {
+      pokemonModel.create(pokemonDex)
+      .then((doc) => {
+        // console.log('doc', doc)
 
-  if(!pokemonDex){
-    return res.send('Invalid body');
-  }else if(product){
-    return res.status(200).json({ msg : "Error the id is duplicated"});
-  } else {
-    pokemonModel.create(pokemonDex)
-    .then((doc) => {
-      console.log('doc', doc)
-      return res.status(200).json({status: "Success", msg: "post complited",data: doc})
-    })
-    .catch((err) => {
+        return res.json({ msg: "post complited"})
+      })     
+    }
+  } catch(err){
       console.log('err', err)
-      return res.status(500).json({status: "ServerErrror", errMsg: "Error encountered when creating a pokemon"})
-    })
+      return res.json({errMsg: "Error : when creating a pokemon"})
   }
+
+
+
 })
 
 // app.get('/api/v1/pokemon/:id')                   // - get a pokemon
@@ -201,15 +187,14 @@ app.get('/api/v1/pokemon/:id', (req,res)=>{
     .then((doc)=>{
 
       if (doc == null){
-        return res.status(200).json({ msg : "Error : pass pokemon id between 1 and 811"});
-        // res.json({value:"Cast Error: pass pokemon id between 1 and 811"})
+        return res.json({ errMsg : "Error : pass pokemon id between 1 and 811"});
       } else {
         res.json(doc)
       }
     })
-    .catch(err=>{
-      return res.status(500).json({status: "ServerErrror", errMsg: "Error : when getting a pokemon"})
-    })
+    // .catch(err=>{
+    //   return res.status(500).json({status: "ServerErrror", errMsg: "Error : when getting a pokemon"})
+    // })
 });
 
 // app.get('/api/v1/pokemonImage/:id')              // - get a pokemon Image URL
@@ -237,27 +222,24 @@ app.get('/api/v1/pokemonImage/:id', (req,res)=>{
 });
 
 // app.put('/api/v1/pokemon/:id')                   // - upsert a whole pokemon document
-app.put('/api/v1/pokemon/:id', (req, res)=>{
-  var inputId = req.params.id;
-  pokemonModel.findOne({id: inputId})
-  .then((doc)=>{
-    if (doc == null){
-      res.json({value:"Cast Error: pass pokemon id between 1 and 811"})
-    } else {
+app.put('/api/v1/pokemon/:id', (req, res) => {
+  // upserts a whole pokemon document
+  var inputId = parseInt(req.params.id);
+  const { id, ...rest } = req.body;
+  // if(!containsAnyLetters(pokeId)){
+      pokemonModel.findOneAndUpdate({ id: inputId }, {$set: { ...rest}, }, { runValidators: true, upsert: true, new:true }, function (err) {
+      if (err) {
+          res.json({ errMsg: "Invalid Entry" })
+      } else {
+          res.json({ msg:"Updated/Created Successfully"})
+      }
+      });
+  // } else {
+  //     res.json({ errMsg: "Invalid Entry" }) 
+  // }
+}) 
 
-      const filter = {id : inputId}
-      console.log(filter)
-      const update = {data : req.body}
-      console.log(update)
 
-      pokemonModel.findOneAndUpdate(filter, update, {
-        upsert: true
-      });      
-    }
-  })
-})
-
-// app.patch('/api/v1/pokemon/:id')                 // - patch a pokemon document or a portion of the pokemon document
 
 // app.delete('/api/v1/pokemon/:id')                // - delete a  pokemon
 
@@ -274,6 +256,5 @@ app.delete('/api/v1/pokemon/:id', (req,res)=>{
         return res.json({msg: "Delete complited"});
       }
     }
-   
   })
 }) 
