@@ -3,27 +3,27 @@
   <h3>Kwanyong Jo </h3>
   <h3>A01207367</h3>
 
-* **Self-Graded Rubric**
-GET [3]  `--> complite`
-[✔] GETing all the pokémons.
-[✔] GETing all the pokémons - missing count or after.
-[✔] GETing all the pokémons - improper values for count or after.
-[✔] GETing a pokémon.
-[✔] GETing a pokémon - pokémon not found.
-[✔] GETing a pokémon - improper key used to get a pokémon.
-POST [1]  `--> complite`
-[✔] POSTing a pokémon.
-[✔] POSTing a pokémon - improper data
-[✔] POSTing a pokémon - duplicate pokémon
-DEL [1]  `--> complite`
-[✔] DELetting a pokémon.
-[✔] DELetting a pokémon - pokémon not found
-PUT [1]  `--> complite`
-[✔] PUTting a pokémon.
-[✔] POSTing a pokémon - upsert
-PATCH [1]  `--> complite`
-[✔] PATCHing a pokémon.
-[✔] PATCHing a pokémon - pokémon not found
-Improper Route [✔]  `--> complite`
+* **Self-Graded Rubric** <br>
+GET [3]  `--> complite`<br>
+[✔] GETing all the pokémons.<br>
+[✔] GETing all the pokémons - missing count or after.<br>
+[✔] GETing all the pokémons - improper values for count or after.<br>
+[✔] GETing a pokémon.<br>
+[✔] GETing a pokémon - pokémon not found.<br>
+[✔] GETing a pokémon - improper key used to get a pokémon.<br>
+POST [1]  `--> complite`<br>
+[✔] POSTing a pokémon.<br>
+[✔] POSTing a pokémon - improper data<br>
+[✔] POSTing a pokémon - duplicate pokémon<br>
+DEL [1]  `--> complite`<br>
+[✔] DELetting a pokémon.<br>
+[✔] DELetting a pokémon - pokémon not found<br>
+PUT [1]  `--> complite`<br>
+[✔] PUTting a pokémon.<br>
+[✔] POSTing a pokémon - upsert<br>
+PATCH [1]  `--> complite`<br>
+[✔] PATCHing a pokémon.<br>
+[✔] PATCHing a pokémon - pokémon not found<br>
+Improper Route [✔]  `--> complite`<br>
 
 <h2> Total mark : 8 </h2>
