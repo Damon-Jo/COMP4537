@@ -5,12 +5,9 @@
 
 * **URL**
 
-  <_The URL Structure (path only, no root url)_>
-  > Indentation1
-  : Indentation11
-  + Indentation2
-  * Indentation3
-    + Indentation4
+  + herokuapp : https://limitless-waters-28521.herokuapp.com/
+  * git : https://github.com/Damon-Jo/COMP4537_SETU/tree/master/Assignment1
+  * youtube : https://www.youtube.com/watch?v=jqanSqtPkHg
 
 * **Method:**
   
