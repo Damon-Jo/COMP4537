@@ -65,87 +65,86 @@
 
 *  **Sample Request and Responses**
    * This is response of get request `app.get('/api/v1/pokemon/:id')`
-    <p>
-    <pre>
-{
-  "name": {
-    "english": "Bulbasaur",
-    "japanese": "フシギダネ",
-    "chinese": "妙蛙种子",
-    "french": "Bulbizarre"
-  },
-  "base": {
-    "Sp": {
-      " Attack": 65,
-      " Defense": 65
-    },
-    "HP": 45,
-    "Attack": 49,
-    "Defense": 49,
-    "Speed": 45
-  },
-  "_id": "6341dbc3b6f7ee4b228ca0e0",
-  "id": 1,
-  "type": [
-    "Grass",
-    "Poison"
-  ],
-  "__v": 0
-}
-</pre>
+      <pre>
+        {
+          "name": {
+            "english": "Bulbasaur",
+            "japanese": "フシギダネ",
+            "chinese": "妙蛙种子",
+            "french": "Bulbizarre"
+          },
+          "base": {
+            "Sp": {
+              " Attack": 65,
+              " Defense": 65
+            },
+            "HP": 45,
+            "Attack": 49,
+            "Defense": 49,
+            "Speed": 45
+          },
+          "_id": "6341dbc3b6f7ee4b228ca0e0",
+          "id": 1,
+          "type": [
+            "Grass",
+            "Poison"
+          ],
+          "__v": 0
+        }
+      </pre>
   * This is response of get request `{{URL}}pokemons?count=2&after=10`
-<pre>
-  [
-  {
-    "name": {
-      "english": "Metapod",
-      "japanese": "トランセル",
-      "chinese": "铁甲蛹",
-      "french": "Chrysacier"
-    },
-    "base": {
-      "Sp": {
-        " Attack": 25,
-        " Defense": 25
-      },
-      "HP": 50,
-      "Attack": 20,
-      "Defense": 55,
-      "Speed": 30
-    },
-    "_id": "6341dbc3b6f7ee4b228ca0ea",
-    "id": 11,
-    "type": [
-      "Bug"
-    ],
-    "__v": 0
-  },
-  {
-    "name": {
-      "english": "Butterfree",
-      "japanese": "バタフリー",
-      "chinese": "巴大蝶",
-      "french": "Papilusion"
-    },
-    "base": {
-      "Sp": {
-        " Attack": 90,
-        " Defense": 80
-      },
-      "HP": 60,
-      "Attack": 45,
-      "Defense": 50,
-      "Speed": 70
-    },
-    "_id": "6341dbc3b6f7ee4b228ca0eb",
-    "id": 12,
-    "type": [
-      "Bug",
-      "Flying"
-    ],
-    "__v": 0
-  }
-]```
-</pre>
+      <pre>
+        [
+        {
+          "name": {
+            "english": "Metapod",
+            "japanese": "トランセル",
+            "chinese": "铁甲蛹",
+            "french": "Chrysacier"
+          },
+          "base": {
+            "Sp": {
+              " Attack": 25,
+              " Defense": 25
+            },
+            "HP": 50,
+            "Attack": 20,
+            "Defense": 55,
+            "Speed": 30
+          },
+          "_id": "6341dbc3b6f7ee4b228ca0ea",
+          "id": 11,
+          "type": [
+            "Bug"
+          ],
+          "__v": 0
+        },
+        {
+          "name": {
+            "english": "Butterfree",
+            "japanese": "バタフリー",
+            "chinese": "巴大蝶",
+            "french": "Papilusion"
+          },
+          "base": {
+            "Sp": {
+              " Attack": 90,
+              " Defense": 80
+            },
+            "HP": 60,
+            "Attack": 45,
+            "Defense": 50,
+            "Speed": 70
+          },
+          "_id": "6341dbc3b6f7ee4b228ca0eb",
+          "id": 12,
+          "type": [
+            "Bug",
+            "Flying"
+          ],
+          "__v": 0
+        }
+      ]
+      </pre>
 
 * **Notes:**
