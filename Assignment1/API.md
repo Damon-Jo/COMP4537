@@ -66,7 +66,7 @@
 *  **Sample Request and Responses**
    * This is response of get request `app.get('/api/v1/pokemon/:id')`
     <p>
-    {
+    ```{
   "name": {
     "english": "Bulbasaur",
     "japanese": "フシギダネ",
@@ -90,11 +90,11 @@
     "Poison"
   ],
   "__v": 0
-}
+}```
     </p>
   * This is response of get request `{{URL}}pokemons?count=2&after=10`
   <p>
-[
+  ```[
   {
     "name": {
       "english": "Metapod",
@@ -144,7 +144,7 @@
     ],
     "__v": 0
   }
-]
+]```
   </p>
 
 
