@@ -115,23 +115,17 @@ app.get('/', (req, res) => {
 
 // app.get('/api/v1/pokemons?count=2&after=10')     // - get all the pokemons after the 10th. List only Two.
 app.get('/api/v1/pokemons', function(req, res) {
-  console.log(req.query);
   var after = null
   var count = null
 
   if(req.query){
     after = {id: {$gt: parseInt(req.query.after)}}
-    console.log(after)
     count = parseInt(req.query.count)
-
-
     pokemonModel.find(after).limit(count)
     .then((doc)=>{
-
       if (doc.length == 0){
         return res.json({ errMsg : "Error : pokemon id should be between 1 and 809"});
       } else {
-        console.timeLog(doc)
         res.json(doc)
       }
     })
@@ -154,7 +148,6 @@ app.post('/api/v1/pokemon', async (req,res)=>{
   var pokemonDex = req.body
   let product = await pokemonModel.exists({id: pokemonDex.id});
   var jsonLenth = parseInt(Object.keys(pokemonModel).length);
-  console.log(jsonLenth)
   try{
     if(!pokemonDex || Object.keys(pokemonDex).length === 0){
       return res.send({errMsg : 'Invalid request body'});
@@ -195,7 +188,6 @@ app.get('/api/v1/pokemonImage/:id', (req,res)=>{
   var id = req.params.id;
   var newId;
 
-  console.log(typeof id);
   if (id.length == 1){
     newId = '00' + id;
   } else if(id.length == 2){
