@@ -1,0 +1,354 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Pokemons",
+    "dateExported": "2022-10-08T08:15:20.811Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [{
+        "_id": "af7908fd-cf76-44ea-846f-e481edc6b89d",
+        "colId": "34aae80a-f5c4-447c-ab32-89fd80986756",
+        "containerId": "",
+        "name": "pokemons query param",
+        "url": "{{URL}}pokemons?count=2&after=10",
+        "method": "GET",
+        "sortNum": 10000,
+        "created": "2022-10-04T06:54:10.161Z",
+        "modified": "2022-10-08T04:56:18.907Z",
+        "headers": [],
+        "params": [{
+            "name": "count",
+            "value": "2",
+            "isPath": false
+        }, {
+            "name": "after",
+            "value": "10",
+            "isPath": false
+        }],
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }, {
+            "type": "json-query",
+            "custom": "json[0].id",
+            "action": "equal",
+            "value": "11"
+        }, {
+            "type": "json-query",
+            "custom": "json",
+            "action": "count",
+            "value": "2"
+        }]
+    }, {
+        "_id": "7c4885a6-e13b-4c8f-9053-02a0b44e6d1c",
+        "colId": "34aae80a-f5c4-447c-ab32-89fd80986756",
+        "containerId": "",
+        "name": "pokemons query notFound",
+        "url": "{{URL}}pokemons?after=1111",
+        "method": "GET",
+        "sortNum": 15000,
+        "created": "2022-10-08T05:16:17.259Z",
+        "modified": "2022-10-08T06:25:45.510Z",
+        "headers": [],
+        "params": [{
+            "name": "count",
+            "value": "2",
+            "isDisabled": true,
+            "isPath": false
+        }, {
+            "name": "after",
+            "value": "1111",
+            "isPath": false
+        }],
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }, {
+            "type": "json-query",
+            "custom": "json.errMsg",
+            "action": "equal",
+            "value": "Error : pokemon id should be between 1 and 809"
+        }]
+    }, {
+        "_id": "10a3a514-f1bc-4600-ade0-35e1db0bd726",
+        "colId": "34aae80a-f5c4-447c-ab32-89fd80986756",
+        "containerId": "",
+        "name": "pokemon",
+        "url": "{{URL}}pokemon/",
+        "method": "POST",
+        "sortNum": 20000,
+        "created": "2022-10-06T06:27:22.608Z",
+        "modified": "2022-10-08T04:57:11.853Z",
+        "headers": [],
+        "params": [],
+        "body": {
+            "type": "json",
+            "raw": "{\n  \"name\": {\n    \"english\": \"test\",\n    \"japanese\": \"test\",\n    \"chinese\": \"test\",\n    \"french\": \"test\"\n  },\n  \"base\": {\n    \"Sp\": {\n      \" Attack\": 65,\n      \" Defense\": 65\n    },\n    \"HP\": 45,\n    \"Attack\": 49,\n    \"Defense\": 49,\n    \"Speed\": 45\n  },\n  \"id\": 1000,\n  \"type\": [\n    \"Grass\",\n    \"Poison\"\n  ],\n  \"__v\": 0\n}",
+            "form": []
+        },
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }, {
+            "type": "json-query",
+            "custom": "json.msg",
+            "action": "equal",
+            "value": "post complited"
+        }]
+    }, {
+        "_id": "5b634138-a928-4a50-92de-10c8dfe1dfe3",
+        "colId": "34aae80a-f5c4-447c-ab32-89fd80986756",
+        "containerId": "",
+        "name": "pokemon improperdata",
+        "url": "{{URL}}pokemon/",
+        "method": "POST",
+        "sortNum": 22500,
+        "created": "2022-10-08T05:32:02.104Z",
+        "modified": "2022-10-08T06:30:38.672Z",
+        "headers": [],
+        "params": [],
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }, {
+            "type": "json-query",
+            "custom": "json.errMsg",
+            "action": "equal",
+            "value": "Invalid request body"
+        }]
+    }, {
+        "_id": "5f8c8963-e221-4e7c-8a10-522808158061",
+        "colId": "34aae80a-f5c4-447c-ab32-89fd80986756",
+        "containerId": "",
+        "name": "pokemon duplicate",
+        "url": "{{URL}}pokemon",
+        "method": "POST",
+        "sortNum": 25000,
+        "created": "2022-10-06T07:45:48.602Z",
+        "modified": "2022-10-08T06:31:05.809Z",
+        "headers": [],
+        "params": [],
+        "body": {
+            "type": "json",
+            "raw": "{\n  \"name\": {\n    \"english\": \"test\",\n    \"japanese\": \"test\",\n    \"chinese\": \"test\",\n    \"french\": \"test\"\n  },\n  \"base\": {\n    \"Sp\": {\n      \" Attack\": 65,\n      \" Defense\": 65\n    },\n    \"HP\": 45,\n    \"Attack\": 49,\n    \"Defense\": 49,\n    \"Speed\": 45\n  },\n  \"id\": 1000,\n  \"type\": [\n    \"Grass\",\n    \"Poison\"\n  ],\n  \"__v\": 0\n}",
+            "form": []
+        },
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }, {
+            "type": "json-query",
+            "custom": "json.msg",
+            "action": "equal",
+            "value": "Error : the id is duplicated"
+        }]
+    }, {
+        "_id": "7a1df8b5-cdc3-4e67-918f-b0d7903af883",
+        "colId": "34aae80a-f5c4-447c-ab32-89fd80986756",
+        "containerId": "",
+        "name": "pokemons_id",
+        "url": "{{URL}}pokemon/1000",
+        "method": "GET",
+        "sortNum": 30000,
+        "created": "2022-10-04T23:55:26.208Z",
+        "modified": "2022-10-08T04:57:53.158Z",
+        "headers": [],
+        "params": [],
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }, {
+            "type": "json-query",
+            "custom": "json.id",
+            "action": "equal",
+            "value": "1000"
+        }]
+    }, {
+        "_id": "1fc3ca82-d333-4219-9e7c-d350faa083b8",
+        "colId": "34aae80a-f5c4-447c-ab32-89fd80986756",
+        "containerId": "",
+        "name": "pokemons_id notFound",
+        "url": "{{URL}}pokemon/1111",
+        "method": "GET",
+        "sortNum": 37500,
+        "created": "2022-10-08T05:58:17.962Z",
+        "modified": "2022-10-08T06:31:28.199Z",
+        "headers": [],
+        "params": [],
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }, {
+            "type": "json-query",
+            "custom": "json.errMsg",
+            "action": "equal",
+            "value": "Error : pokemon id should be between 1 and 809"
+        }]
+    }, {
+        "_id": "9bbfb453-2d22-4c8b-b7a2-1dc888e1de6b",
+        "colId": "34aae80a-f5c4-447c-ab32-89fd80986756",
+        "containerId": "",
+        "name": "pokemon",
+        "url": "{{URL}}pokemon/1000",
+        "method": "PUT",
+        "sortNum": 45000,
+        "created": "2022-10-06T06:22:03.058Z",
+        "modified": "2022-10-08T06:31:45.247Z",
+        "headers": [],
+        "params": [],
+        "body": {
+            "type": "json",
+            "raw": "{\n  \"name\": {\n    \"english\": \"aabb\",\n    \"japanese\": \"フシギダネ\",\n    \"chinese\": \"妙蛙种子\",\n    \"french\": \"Bulbizarre\"\n  },\n  \"base\": {\n    \"Sp\": {\n      \" Attack\": 2565,\n      \" Defense\": 65\n    },\n    \"HP\": 45,\n    \"Attack\": 49,\n    \"Defense\": 49,\n    \"Speed\": 45\n  },\n  \"id\": 2000,\n  \"type\": [\n    \"Grass\",\n    \"Poison\"\n  ],\n  \"__v\": 0\n}",
+            "form": []
+        },
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }, {
+            "type": "json-query",
+            "custom": "json.msg",
+            "action": "equal",
+            "value": "Updated or created Successfully"
+        }]
+    }, {
+        "_id": "84bd46a4-e410-4a7d-b9c9-319796f6e0bc",
+        "colId": "34aae80a-f5c4-447c-ab32-89fd80986756",
+        "containerId": "",
+        "name": "pokemon UPSERT",
+        "url": "{{URL}}pokemon/1000",
+        "method": "PUT",
+        "sortNum": 47500,
+        "created": "2022-10-08T06:03:21.091Z",
+        "modified": "2022-10-08T06:32:10.482Z",
+        "headers": [],
+        "params": [],
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }, {
+            "type": "json-query",
+            "custom": "json.msg",
+            "action": "equal",
+            "value": "Updated or created Successfully"
+        }]
+    }, {
+        "_id": "7d2b5879-37e6-40c1-b9c8-09c03e8a267d",
+        "colId": "34aae80a-f5c4-447c-ab32-89fd80986756",
+        "containerId": "",
+        "name": "pokemon",
+        "url": "{{URL}}pokemon/1000",
+        "method": "DELETE",
+        "sortNum": 70000,
+        "created": "2022-10-07T21:40:00.246Z",
+        "modified": "2022-10-07T22:17:12.523Z",
+        "headers": [],
+        "params": [],
+        "tests": [{
+            "type": "res-code",
+            "custom": "",
+            "action": "isjson",
+            "value": "false"
+        }, {
+            "type": "json-query",
+            "custom": "json.msg",
+            "action": "equal",
+            "value": "Delete complited"
+        }]
+    }, {
+        "_id": "2cca079d-cd91-4a83-a8d9-a3e6fd2874a4",
+        "colId": "34aae80a-f5c4-447c-ab32-89fd80986756",
+        "containerId": "",
+        "name": "pokemon not found",
+        "url": "{{URL}}pokemon/10001",
+        "method": "DELETE",
+        "sortNum": 80000,
+        "created": "2022-10-07T21:42:42.810Z",
+        "modified": "2022-10-07T22:18:45.619Z",
+        "headers": [],
+        "params": [],
+        "tests": [{
+            "type": "res-code",
+            "custom": "",
+            "action": "isjson",
+            "value": "false"
+        }, {
+            "type": "json-query",
+            "custom": "json.errMsg",
+            "action": "equal",
+            "value": "Error : this pokemon id is not exist"
+        }]
+    }, {
+        "_id": "537b5071-d841-43ba-b6b6-1be663256884",
+        "colId": "34aae80a-f5c4-447c-ab32-89fd80986756",
+        "containerId": "",
+        "name": "pokemon",
+        "url": "{{URL}}pokemon/1000",
+        "method": "PATCH",
+        "sortNum": 80000,
+        "created": "2022-10-08T01:33:52.884Z",
+        "modified": "2022-10-08T06:48:41.449Z",
+        "headers": [],
+        "params": [],
+        "body": {
+            "type": "json",
+            "raw": "{\n  \"type\": [\n    \"Fighting\"\n  ]\n}",
+            "form": []
+        },
+        "tests": [{
+            "type": "res-code",
+            "custom": "",
+            "action": "equal",
+            "value": "200"
+        }, {
+            "type": "json-query",
+            "custom": "json.msg",
+            "action": "equal",
+            "value": "Udtated Successfully"
+        }]
+    }, {
+        "_id": "70677327-0f02-4625-91cc-72c982d76054",
+        "colId": "34aae80a-f5c4-447c-ab32-89fd80986756",
+        "containerId": "",
+        "name": "pokemon notFound",
+        "url": "{{URL}}pokemon/10011111",
+        "method": "PATCH",
+        "sortNum": 90000,
+        "created": "2022-10-08T01:40:03.392Z",
+        "modified": "2022-10-08T06:16:32.386Z",
+        "headers": [],
+        "params": [],
+        "body": {
+            "type": "json",
+            "raw": "{\n  \"type\": [\n    \"Fighting\"\n  ]\n}",
+            "form": []
+        },
+        "tests": [{
+            "type": "res-code",
+            "custom": "",
+            "action": "equal",
+            "value": "200"
+        }, {
+            "type": "json-query",
+            "custom": "json.errMsg",
+            "action": "equal",
+            "value": "this pokemon id is not exist"
+        }]
+    }]
+}

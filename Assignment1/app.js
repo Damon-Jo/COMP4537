@@ -254,3 +254,7 @@ app.delete('/api/v1/pokemon/:id', (req,res)=>{
     }
   })
 }) 
+// Improper Route
+app.get('*', function (req, res) {
+  res.json({msg: "Error : Improper route"});
+})
