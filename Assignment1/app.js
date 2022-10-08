@@ -239,7 +239,23 @@ app.put('/api/v1/pokemon/:id', (req, res) => {
   // }
 }) 
 
+// app.patch('/api/v1/pokemon/:id')                 // - patch a pokemon document or a portion of the pokemon document
+app.patch('/api/v1/pokemon/:id', async (req,res)=>{
+  var inputId = parseInt(req.params.id);
+  const { id, ...rest } = req.body;
 
+  var pokemon = await pokemonModel.find({id: id})
+  if (pokemon.length == 0) {
+    return res.json({errMsg: "this pokemon id is not exist"});
+  }
+    pokemonModel.updateOne({id: inputId}, {$set: {...rest}}, {runValidators:true}, function(err, res){
+      if(err) {
+
+        return res.json({errMsg: "this pokemon id is not exist"});
+      }
+    })
+    return res.json({msg: "Udtate Successfully"});
+})
 
 // app.delete('/api/v1/pokemon/:id')                // - delete a  pokemon
 
