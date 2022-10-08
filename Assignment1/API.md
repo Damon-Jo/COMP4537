@@ -67,7 +67,6 @@
    * This is response of get request `app.get('/api/v1/pokemon/:id')`
     <p>
     <pre>
-      <code>
 {
   "name": {
     "english": "Bulbasaur",
@@ -93,7 +92,6 @@
   ],
   "__v": 0
 }
-</code>
 </pre>
   * This is response of get request `{{URL}}pokemons?count=2&after=10`
 <pre>
