@@ -19,22 +19,22 @@
 &nbsp;&nbsp; to get all the pokemons after the `after`. List only `count` number of pokemons
 
 
-   * app.post('/api/v1/pokemon')
+   * app.post('/api/v1/pokemon')<br>
 &nbsp;&nbsp; to create a new pokemon
 
-   * app.get('/api/v1/pokemon/:id')
+   * app.get('/api/v1/pokemon/:id')<br>
 &nbsp;&nbsp; to get a pokemon by specific `id`
 
-   * app.get('/api/v1/pokemonImage/:id')
+   * app.get('/api/v1/pokemonImage/:id')<br>
 &nbsp;&nbsp; to get a pokemon Image URL by specific `id`
    
-   * app.put('/api/v1/pokemon/:id')
+   * app.put('/api/v1/pokemon/:id')<br>
 &nbsp;&nbsp; to upsert a whole pokemon document by specific `id`
 
-   * app.patch('/api/v1/pokemon/:id')
+   * app.patch('/api/v1/pokemon/:id')<br>
 &nbsp;&nbsp; to patch a pokemon doc or portion of the pokemon doc by specific `id`   
 
-   * app.delete('/api/v1/pokemon/:id')
+   * app.delete('/api/v1/pokemon/:id')<br>
 &nbsp;&nbsp; to delete a pokemon by specific `id`
 
 
