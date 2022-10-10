@@ -7,7 +7,7 @@
 
   + herokuapp : https://limitless-waters-28521.herokuapp.com/
   * git : https://github.com/Damon-Jo/COMP4537_SETU/tree/master/Assignment1
-  * youtube : https://www.youtube.com/watch?v=jqanSqtPkHg
+  * youtube : https://youtu.be/gJJIoMylbgo
 
 * **Method:**
   

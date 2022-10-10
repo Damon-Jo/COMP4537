@@ -231,11 +231,11 @@ app.put('/api/v1/pokemon/:id', (req, res) => {
   // upserts a whole pokemon document
   var inputId = parseInt(req.params.id);
   const { id, ...rest } = req.body;
-      pokemonModel.findOneAndUpdate({ id: inputId }, rest, { new:true, runValidators: true  }, function (err) {
+      pokemonModel.findOneAndUpdate({ id: inputId }, rest, { runValidators: true, new:true, upsert: true }, function (err) {
       if (err) {
           res.json({ errMsg: "Invalid value" })
       } else {
-          res.json({ msg:"Updated or created Successfully", pokeInfo:{id: inputId, ...rest}})
+          res.json({ msg:"Updated or created Successfully"})
       }
       });
 }) 
@@ -253,7 +253,7 @@ app.patch('/api/v1/pokemon/:id', async (req,res)=>{
     if(err) {
       return res.json({errMsg: "this pokemon id is not exist"});
     } else {
-      return res.json({msg: "Udtated Successfully", pokeInfo:{id: inputId, ...rest}});
+      return res.json({msg: "Udtated Successfully"});
     }
   })
 })
