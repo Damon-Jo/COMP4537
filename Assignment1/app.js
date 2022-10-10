@@ -25,7 +25,7 @@ app.listen(process.env.PORT || port, async () => {
       data += chunk // aggregate data
     });
     res.on('end', () => {
-      console.log('No more data in response.')
+      console.log("The types of pokemons are loaded from the url.")
       pokemonTypes = JSON.parse(data).map(type => {
         return type.english;
       })
@@ -79,7 +79,6 @@ app.listen(process.env.PORT || port, async () => {
       chunks += chunk;
     });
     res.on('end', async () => {
-      console.log('No more data in response.')
       pokemons = JSON.parse(chunks);
 
 
@@ -118,9 +117,7 @@ app.get('/api/v1/pokemons', function(req, res) {
   var after = null
   var count = null
 
-  console.log(req.query)
   var size = Object.keys(req.query).length
-  console.log(size)
   if(size != 0){
     after = {id: {$gt: parseInt(req.query.after)}}
     count = parseInt(req.query.count)
@@ -152,26 +149,36 @@ app.get('/api/v1/pokemons', function(req, res) {
 app.post('/api/v1/pokemon', async (req,res)=>{
   var pokemonDex = req.body
   let product = await pokemonModel.exists({id: pokemonDex.id});
-  var jsonLenth = parseInt(Object.keys(pokemonModel).length);
-  try{
-    if(!pokemonDex || Object.keys(pokemonDex).length === 0){
-      return res.send({errMsg : 'Invalid request body'});
-    }else if(product){
-      return res.json({ msg : "Error : the id is duplicated"});
-    } else {
-      pokemonModel.create(pokemonDex)
-      .then((doc) => {
-        return res.json({ msg: "post complited"})
-      })     
+  
+  var sizeOfObject = Object.keys(pokemonDex).length
+  var dbQuerySize = Object.keys(pokemonModel).length
+
+  // var jsonLenth = parseInt(Object.keys(pokemonModel).length);
+
+  console.log(pokemonDex.id == null)
+  //Check if there is an ID in the request body
+  if(pokemonDex.id == null){
+    return res.send({errMsg : 'The request body is invalid'});
+  } else {
+    try{
+      if(!pokemonDex || sizeOfObject === 0){
+        return res.send({errMsg : "Error : the request body is missing"});
+      }else if(product){
+        return res.json({ errMsg : "Error : the id is duplicated"});
+      } else {
+        pokemonModel.create(pokemonDex)
+        .then((doc) => {
+          return res.json({ msg: "post complited"})
+        })     
+      }
+    } catch(err){
+        console.log('err', err)
+        return res.json({errMsg: "Error : when creating a pokemon"})
     }
-  } catch(err){
-      console.log('err', err)
-      return res.json({errMsg: "Error : when creating a pokemon"})
   }
-
-
-
 })
+
+
 
 // app.get('/api/v1/pokemon/:id')                   // - get a pokemon
 app.get('/api/v1/pokemon/:id', (req,res)=>{
