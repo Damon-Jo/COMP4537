@@ -11,8 +11,6 @@
 
 * **Method:**
   
-  <_The request type_>
-
   `GET` | `POST` | `PUT` | `PATCH` | `DELETE`
 
    + app.get('/api/v1/pokemons?count=<number>&after=<number>')<br>
@@ -41,26 +39,27 @@
 
 
 *  **schema rules**
-  + id <br>
-    > type : Number, unique : true
-  
-  * name <br>
-    > type : Object with following elements
-    > english, type:String, maxlength:20
-    > japanese, type:String,
-    > chinese, type:String,
-    > french, type:String,
-  * type <br>
-    > type : String Array from pokemonTypes enum
-  
-  * base <br>
-    > type : Object with following elements
-    > HP, type:Number,
-    > Attack, type:Number,
-    > Defense, type:Number,
-    > Sp. Attack, type:Number,
-    > Sp. Defense, type:Number,
-    > Speed, type:Number,
+
+    + id <br>
+      > type : Number, unique : true
+    
+    * name <br>
+      > type : Object with following elements
+      > english, type:String, maxlength:20
+      > japanese, type:String,
+      > chinese, type:String,
+      > french, type:String,
+    * type <br>
+      > type : String Array from pokemonTypes enum
+    
+    * base <br>
+      > type : Object with following elements
+      > HP, type:Number,
+      > Attack, type:Number,
+      > Defense, type:Number,
+      > Sp. Attack, type:Number,
+      > Sp. Defense, type:Number,
+      > Speed, type:Number,
 
 
 *  **Sample Request and Responses**
