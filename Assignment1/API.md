@@ -41,7 +41,7 @@
 
 
 *  **schema rules**
-  * id <br>
+  + id <br>
     > type : Number, unique : true
   
   * name <br>
