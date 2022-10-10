@@ -118,7 +118,10 @@ app.get('/api/v1/pokemons', function(req, res) {
   var after = null
   var count = null
 
-  if(req.query){
+  console.log(req.query)
+  var size = Object.keys(req.query).length
+  console.log(size)
+  if(size != 0){
     after = {id: {$gt: parseInt(req.query.after)}}
     count = parseInt(req.query.count)
     pokemonModel.find(after).limit(count)
@@ -132,10 +135,12 @@ app.get('/api/v1/pokemons', function(req, res) {
     .catch(err=>{
       return res.json({errMsg: "Error : when getting a pokemon"})
     })
-
-  }else {
+        }else {
           pokemonModel.find({})
-              .then(docs => { lengthChecker(res, docs) })
+              .then(doc => {
+                console.log(doc)
+                res.json(doc)
+               })
               .catch(err => {
                   console.error(err)
                   res.json({ msg: "Error : returning pokemon" })
@@ -238,18 +243,16 @@ app.patch('/api/v1/pokemon/:id', async (req,res)=>{
 })
 
 // app.delete('/api/v1/pokemon/:id')                // - delete a  pokemon
-
 app.delete('/api/v1/pokemon/:id', (req,res)=>{
   var id = parseInt(req.params.id);
   pokemonModel.deleteOne({id:id}, function(err, result){
     if (err) {
       return res.json({errMsg: "Error : this pokemon id is not exist"});
     } else {
-
       if (result.deletedCount == 0){
         return res.json({errMsg: "Error : this pokemon id is not exist"});
       } else {
-        return res.json({msg: "Delete complited"});
+        return res.json({msg: "Delete completed"});
       }
     }
   })
