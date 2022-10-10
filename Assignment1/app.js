@@ -135,7 +135,6 @@ app.get('/api/v1/pokemons', function(req, res) {
         }else {
           pokemonModel.find({})
               .then(doc => {
-                console.log(doc)
                 res.json(doc)
                })
               .catch(err => {
@@ -152,10 +151,14 @@ app.post('/api/v1/pokemon', async (req,res)=>{
   
   var sizeOfObject = Object.keys(pokemonDex).length
   var dbQuerySize = Object.keys(pokemonModel).length
+  let pokeNameLeng = req.body.name.english.length;
+
+  if (pokeNameLeng>20){
+    return res.json({errMsg : "ValidationError: check your ..."});
+  }
 
   // var jsonLenth = parseInt(Object.keys(pokemonModel).length);
 
-  console.log(pokemonDex.id == null)
   //Check if there is an ID in the request body
   if(pokemonDex.id == null){
     return res.send({errMsg : 'The request body is invalid'});
@@ -182,24 +185,29 @@ app.post('/api/v1/pokemon', async (req,res)=>{
 
 // app.get('/api/v1/pokemon/:id')                   // - get a pokemon
 app.get('/api/v1/pokemon/:id', (req,res)=>{
+  
   var id = req.params.id;
-  pokemonModel.findOne({id: id})
-    .then((doc)=>{
+  // var regExp = /[a-zA-Z]/g;
 
+  if(/[a-z]/i.test(id)){
+    return res.json({errMsg: "Cast Error: pass pokemon id between 1 and 811"});
+  }else {
+    pokemonModel.findOne({id: id})
+    .then((doc)=>{
       if (doc == null){
         return res.json({ errMsg : "Error : pokemon id should be between 1 and 809"});
       } else {
         res.json(doc)
       }
     })
-
+  }
 });
 
 // app.get('/api/v1/pokemonImage/:id')              // - get a pokemon Image URL
 app.get('/api/v1/pokemonImage/:id', (req,res)=>{
   var id = req.params.id;
   var newId;
-
+  //Converts ID to three-character letters for use in image url
   if (id.length == 1){
     newId = '00' + id;
   } else if(id.length == 2){
@@ -223,11 +231,11 @@ app.put('/api/v1/pokemon/:id', (req, res) => {
   // upserts a whole pokemon document
   var inputId = parseInt(req.params.id);
   const { id, ...rest } = req.body;
-      pokemonModel.findOneAndUpdate({ id: inputId }, {$set: { ...rest}, }, { runValidators: true, upsert: true, new:true }, function (err) {
+      pokemonModel.findOneAndUpdate({ id: inputId }, rest, { new:true, runValidators: true  }, function (err) {
       if (err) {
           res.json({ errMsg: "Invalid value" })
       } else {
-          res.json({ msg:"Updated or created Successfully"})
+          res.json({ msg:"Updated or created Successfully", pokeInfo:{id: inputId, ...rest}})
       }
       });
 }) 
@@ -241,12 +249,13 @@ app.patch('/api/v1/pokemon/:id', async (req,res)=>{
   if (pokemon.length == 0) {
     return res.json({errMsg: "this pokemon id is not exist"});
   }
-  pokemonModel.updateOne({id: inputId}, {$set: {...rest}}, {runValidators:true}, function(err, res){
+  pokemonModel.updateOne({id: inputId}, rest, {new : true, runValidators:true}, function(err){
     if(err) {
       return res.json({errMsg: "this pokemon id is not exist"});
+    } else {
+      return res.json({msg: "Udtated Successfully", pokeInfo:{id: inputId, ...rest}});
     }
   })
-    return res.json({msg: "Udtated Successfully"});
 })
 
 // app.delete('/api/v1/pokemon/:id')                // - delete a  pokemon
