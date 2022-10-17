@@ -1,0 +1,7 @@
+Exercise 13
+.*ATG([ACGT]{3})+((TAA)|(TAG)|(TGA)).*
+
+
+Exercise 16
+
+1*(1*01*0)*1*
