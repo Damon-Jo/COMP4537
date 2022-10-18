@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const https = require('https')
+const { query } = require('express')
 const app = express()
 const port = 5000
 
@@ -13,7 +14,7 @@ app.use(express.json())
 
 app.listen(process.env.PORT || port, async () => {
   try {
-    mongoose.connect('mongodb+srv://lunaticky:rhanchd6@cluster0.rfmec.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'); 
+    await mongoose.connect('mongodb+srv://lunaticky:rhanchd6@cluster0.rfmec.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'); 
 
   } catch (error) {
     console.log('db error');
@@ -82,14 +83,39 @@ app.listen(process.env.PORT || port, async () => {
       pokemons = JSON.parse(chunks);
 
 
-      let product = await pokemonModel.exists({id: 1});
+      pokemonModel.count(function (err, count) {
+        if (!err && count === 0) {
+          pokemonModel.create(pokemons);
+        } else {
+          pokemonModel.collection.drop();
+          pokemonModel.create(pokemons);
+        }
+    });
 
-      if(product){
-        pokemonModel.collection.drop();
-        pokemonModel.create(pokemons);
-      } else {
-        pokemonModel.create(pokemons);
-      }
+    // pokemons.map(element => {
+    //   //insert to db
+    //   // console.log(element);
+    //   element["base"]["Speed Attack"] = element["base"]["Sp. Attack"];
+    //   delete element["base"]["Sp. Attack"];
+    //   element["base"]["Speed Defense"] = element["base"]["Sp. Defense"];
+    //   delete element["base"]["Sp. Defense"];
+    //   pokemonModel.findOneAndUpdate({id: element["id"]}, {}, { upsert: true, new: true }, function (err, result) {
+    //     if (err) console.log("11111111" + err);
+    //     // saved!
+    //     // console.log(result);
+    //   });
+    // })
+
+
+
+      // let product = await pokemonModel.exists({id: 1});
+
+      // if(product){
+      //   pokemonModel.collection.drop();
+      //   pokemonModel.create(pokemons);
+      // } else {
+      //   pokemonModel.create(pokemons);
+      // }
 
 
       console.log("pokemons are loaded into database");
@@ -189,7 +215,7 @@ app.get('/api/v1/pokemon/:id', (req,res)=>{
   var id = req.params.id;
   // var regExp = /[a-zA-Z]/g;
 
-  if(/[a-z]/i.test(id)){
+  if(/[^0-9]/i.test(id)){
     return res.json({errMsg: "Cast Error: pass pokemon id between 1 and 811"});
   }else {
     pokemonModel.findOne({id: id})
@@ -274,6 +300,60 @@ app.delete('/api/v1/pokemon/:id', (req,res)=>{
   })
 }) 
 // Improper Route
-app.get('*', function (req, res) {
-  res.json({msg: "Error : Improper route"});
+// app.get('*', function (req, res) {
+//   res.json({msg: "Error : Improper route"});
+// })
+
+// app.get('/pokemonsAdvancedFiltering', function(req, res){
+//   res.json({msg: "ss"});
+
+// })
+
+  
+
+
+
+
+app.get('/pokemonsAdvancedFiltering', (req, res) => {
+  // console.log(comparisonOperators)
+
+    let filterArray = [];
+
+    if (req.query.comparisonOperators) {
+
+        const comparison = req.query.comparisonOperators.split(",");
+        console.log(comparison);
+        comparison.map(element => {
+            element = element.trim();
+
+            element = element.replace("<", "$lt");
+            element = element.replace("<=", "$lte");
+            element = element.replace(">", "$gt");
+            element = element.replace(">=", "$gte");
+            element = element.replace("==", "$eq");
+            element = element.replace("!=", "$ne");
+
+
+            const regex = /([a-zA-Z]*)(\$[a-z]*)([0-9]*)/
+
+            const matches = element.match(regex);
+            console.log(matches[1] + " " + matches[2] + " " + matches[3]);
+
+            const comparisonElement = {
+                ["base." + matches[1]]: {
+                    [matches[2]]: matches[3]
+                }
+            }
+            filterArray.push(comparisonElement);
+        })
+    }
+
+
+    pokemonModel.find({
+       $and: filterArray
+    }).exec((err, docs) => {
+        console.log(filterArray);
+        res.json(docs);
+    })
+
 })
