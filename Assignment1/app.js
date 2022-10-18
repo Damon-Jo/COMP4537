@@ -4,7 +4,7 @@ const https = require('https')
 const { query } = require('express')
 const app = express()
 const port = 5000
-const regex = /([a-zA-Z]*)(\$[a-z]*)([0-9]*)/
+const regexForm = /([a-zA-Z]*)(\$[a-z]*)([0-9]*)/
 //var pokemonModel;
 var pokemonTypes;
 var pokemons;
@@ -333,7 +333,7 @@ app.get('/pokemonsAdvancedFiltering', (req, res) => {
             element = element.replace("==", "$eq");
             element = element.replace("!=", "$ne");
 
-            const matches = element.match(regex);
+            const matches = element.match(regexForm);
 
             const comparisonElement = {
                 ["base." + matches[1]]: {
