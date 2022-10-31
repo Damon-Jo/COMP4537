@@ -1,0 +1,496 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Pokemons",
+    "dateExported": "2022-10-10T06:35:46.727Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [{
+        "_id": "ed14ae08-cda9-4b3e-a147-1c744fdab841",
+        "colId": "c8a0da72-668c-411c-b8b3-d2b948c9883e",
+        "containerId": "",
+        "name": "pokemons all",
+        "url": "{{URL}}pokemons/",
+        "method": "GET",
+        "sortNum": 5000,
+        "created": "2022-10-10T05:17:55.526Z",
+        "modified": "2022-10-10T06:27:02.757Z",
+        "headers": [],
+        "params": [],
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }, {
+            "type": "json-query",
+            "custom": "json",
+            "action": "count",
+            "value": "810"
+        }]
+    }, {
+        "_id": "68aaa526-6e92-415b-a034-a8de1b03d54b",
+        "colId": "c8a0da72-668c-411c-b8b3-d2b948c9883e",
+        "containerId": "",
+        "name": "pokemons",
+        "url": "{{URL}}pokemons/?count=2&after=10",
+        "method": "GET",
+        "sortNum": 10000,
+        "created": "2022-10-10T04:24:44.069Z",
+        "modified": "2022-10-10T04:24:44.069Z",
+        "headers": [],
+        "params": [{
+            "name": "count",
+            "value": "2",
+            "isPath": false
+        }, {
+            "name": "after",
+            "value": "10",
+            "isPath": false
+        }],
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }, {
+            "type": "json-query",
+            "custom": "json[0].id",
+            "action": "equal",
+            "value": "11"
+        }, {
+            "type": "json-query",
+            "custom": "json",
+            "action": "count",
+            "value": "2"
+        }]
+    }, {
+        "_id": "93182155-8803-43d2-9f7f-94dbfecf8840",
+        "colId": "c8a0da72-668c-411c-b8b3-d2b948c9883e",
+        "containerId": "",
+        "name": "pokemons missing query",
+        "url": "{{URL}}pokemons/?count=2",
+        "method": "GET",
+        "sortNum": 15000,
+        "created": "2022-10-10T05:19:45.963Z",
+        "modified": "2022-10-10T05:21:17.639Z",
+        "headers": [],
+        "params": [{
+            "name": "count",
+            "value": "2",
+            "isPath": false
+        }],
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }, {
+            "type": "json-query",
+            "custom": "json.errMsg",
+            "action": "equal",
+            "value": "Error : when getting a pokemon"
+        }]
+    }, {
+        "_id": "0c07f9b4-83fc-45ae-8e78-7ad924b6354a",
+        "colId": "c8a0da72-668c-411c-b8b3-d2b948c9883e",
+        "containerId": "",
+        "name": "pokemons improper key",
+        "url": "{{URL}}pokemons/?count=2&after=1011111111",
+        "method": "GET",
+        "sortNum": 17500,
+        "created": "2022-10-10T05:21:23.058Z",
+        "modified": "2022-10-10T05:22:00.065Z",
+        "headers": [],
+        "params": [{
+            "name": "count",
+            "value": "2",
+            "isPath": false
+        }, {
+            "name": "after",
+            "value": "1011111111",
+            "isPath": false
+        }],
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }, {
+            "type": "json-query",
+            "custom": "json.errMsg",
+            "action": "equal",
+            "value": "Error : pokemon id should be between 1 and 809"
+        }]
+    }, {
+        "_id": "4a669c5c-e8dd-4642-b50f-3256caf58027",
+        "colId": "c8a0da72-668c-411c-b8b3-d2b948c9883e",
+        "containerId": "",
+        "name": "pokemon",
+        "url": "{{URL}}pokemon/1000",
+        "method": "GET",
+        "sortNum": 20000,
+        "created": "2022-10-10T04:24:44.071Z",
+        "modified": "2022-10-10T06:23:52.983Z",
+        "headers": [],
+        "params": [],
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }]
+    }, {
+        "_id": "916ff5e7-dd79-446c-bc29-20cb357c661c",
+        "colId": "c8a0da72-668c-411c-b8b3-d2b948c9883e",
+        "containerId": "",
+        "name": "pokemon not found",
+        "url": "{{URL}}pokemon/1000",
+        "method": "GET",
+        "sortNum": 25000,
+        "created": "2022-10-10T04:24:44.072Z",
+        "modified": "2022-10-10T05:26:38.865Z",
+        "headers": [],
+        "params": [],
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }, {
+            "type": "json-query",
+            "custom": "errMsg",
+            "action": "equal",
+            "value": "Error : pokemon id should be between 1 and 809"
+        }]
+    }, {
+        "_id": "26023392-c2cb-46d3-bae8-e6af1c14306d",
+        "colId": "c8a0da72-668c-411c-b8b3-d2b948c9883e",
+        "containerId": "",
+        "name": "pokemon key cast error",
+        "url": "{{URL}}pokemon/gjkl34j@3_*+",
+        "method": "GET",
+        "sortNum": 27500,
+        "created": "2022-10-10T04:24:44.073Z",
+        "modified": "2022-10-10T04:24:44.073Z",
+        "headers": [],
+        "params": [],
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }, {
+            "type": "json-query",
+            "custom": "errMsg",
+            "action": "equal",
+            "value": "Cast Error: pass pokemon id between 1 and 811"
+        }]
+    }, {
+        "_id": "1f0b96cc-3aa4-4e9f-9c47-db4d5bd5b563",
+        "colId": "c8a0da72-668c-411c-b8b3-d2b948c9883e",
+        "containerId": "",
+        "name": "pokemon",
+        "url": "{{URL}}pokemon",
+        "method": "POST",
+        "sortNum": 30000,
+        "created": "2022-10-10T04:24:44.074Z",
+        "modified": "2022-10-10T06:29:26.044Z",
+        "headers": [],
+        "params": [],
+        "body": {
+            "type": "json",
+            "raw": "{\n    \"name\": {\n      \"english\": \"test\",\n      \"japanese\": \"test\",\n      \"chinese\": \"test\",\n      \"french\": \"test\"\n    },\n    \"base\": {\n      \"HP\": 50,\n      \"Attack\": 20,\n      \"Defense\": 55,\n      \"Speed\": 30,\n      \"Speed Attack\": 25,\n      \"Speed Defense\": 25\n    },\n    \n    \"id\":1000,\n    \"type\": [\n      \"Bug\"\n    ],\n    \"__v\": 0\n  }",
+            "form": []
+        },
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }, {
+            "type": "json-query",
+            "custom": "json.msg",
+            "action": "equal",
+            "value": "post complited"
+        }]
+    }, {
+        "_id": "3b97e662-62b3-4485-9599-8674a67110ed",
+        "colId": "c8a0da72-668c-411c-b8b3-d2b948c9883e",
+        "containerId": "",
+        "name": "pokemon validation error",
+        "url": "{{URL}}pokemon",
+        "method": "POST",
+        "sortNum": 32500,
+        "created": "2022-10-10T04:24:44.075Z",
+        "modified": "2022-10-10T04:24:44.075Z",
+        "headers": [],
+        "params": [],
+        "body": {
+            "type": "json",
+            "raw": "{\n    \"name\": {\n      \"english\": \"testuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu\",\n      \"japanese\": \"test\",\n      \"chinese\": \"test\",\n      \"french\": \"test\"\n    },\n    \"base\": {\n      \"HP\": 50,\n      \"Attack\": 20,\n      \"Defense\": 55,\n      \"Speed\": 30,\n      \"Speed Attack\": 25,\n      \"Speed Defense\": 25\n    },\n    \n    \"id\": 1000,\n    \"type\": [\n      \"Bug\"\n    ],\n    \"__v\": 0\n  }",
+            "form": []
+        },
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }, {
+            "type": "json-query",
+            "custom": "json.errMsg",
+            "action": "equal",
+            "value": "ValidationError: check your ..."
+        }]
+    }, {
+        "_id": "55d42079-3066-4390-9584-b734dea6c431",
+        "colId": "c8a0da72-668c-411c-b8b3-d2b948c9883e",
+        "containerId": "",
+        "name": "pokemon duplicate",
+        "url": "{{URL}}pokemon",
+        "method": "POST",
+        "sortNum": 35000,
+        "created": "2022-10-10T04:24:44.076Z",
+        "modified": "2022-10-10T04:55:46.652Z",
+        "headers": [],
+        "params": [],
+        "body": {
+            "type": "json",
+            "raw": "{\n    \"name\": {\n      \"english\": \"test\",\n      \"japanese\": \"test\",\n      \"chinese\": \"test\",\n      \"french\": \"test\"\n    },\n    \"base\": {\n      \"HP\": 50,\n      \"Attack\": 20,\n      \"Defense\": 55,\n      \"Speed\": 30,\n      \"Speed Attack\": 25,\n      \"Speed Defense\": 25\n    },\n    \n    \"id\": 1000,\n    \"type\": [\n      \"Bug\"\n    ],\n    \"__v\": 0\n  }",
+            "form": []
+        },
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }, {
+            "type": "json-query",
+            "custom": "json.errMsg",
+            "action": "equal",
+            "value": "Error : the id is duplicated"
+        }]
+    }, {
+        "_id": "e594d850-55d1-4260-8b4a-97e81c987d9e",
+        "colId": "c8a0da72-668c-411c-b8b3-d2b948c9883e",
+        "containerId": "",
+        "name": "pokemon",
+        "url": "{{URL}}pokemon/1000",
+        "method": "DELETE",
+        "sortNum": 40000,
+        "created": "2022-10-10T04:24:44.077Z",
+        "modified": "2022-10-10T04:58:48.301Z",
+        "headers": [],
+        "params": [],
+        "body": {
+            "type": "json",
+            "raw": "{\n    \"name\": {\n      \"english\": \"test\",\n      \"japanese\": \"test\",\n      \"chinese\": \"test\",\n      \"french\": \"test\"\n    },\n    \"base\": {\n      \"HP\": 50,\n      \"Attack\": 20,\n      \"Defense\": 55,\n      \"Speed\": 30,\n      \"Speed Attack\": 25,\n      \"Speed Defense\": 25\n    },\n    \n    \"id\": 1000,\n    \"type\": [\n      \"Bug\"\n    ],\n    \"__v\": 0\n  }",
+            "form": []
+        },
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }, {
+            "type": "json-query",
+            "custom": "json.msg",
+            "action": "equal",
+            "value": "Delete completed"
+        }]
+    }, {
+        "_id": "fef11c85-5ce8-424d-9957-7859bec20245",
+        "colId": "c8a0da72-668c-411c-b8b3-d2b948c9883e",
+        "containerId": "",
+        "name": "pokemon not found",
+        "url": "{{URL}}pokemon/2000",
+        "method": "DELETE",
+        "sortNum": 50000,
+        "created": "2022-10-10T04:24:44.078Z",
+        "modified": "2022-10-10T05:01:35.486Z",
+        "headers": [],
+        "params": [],
+        "body": {
+            "type": "json",
+            "raw": "{\n    \"name\": {\n      \"english\": \"test\",\n      \"japanese\": \"test\",\n      \"chinese\": \"test\",\n      \"french\": \"test\"\n    },\n    \"base\": {\n      \"HP\": 50,\n      \"Attack\": 20,\n      \"Defense\": 55,\n      \"Speed\": 30,\n      \"Speed Attack\": 25,\n      \"Speed Defense\": 25\n    },\n    \n    \"id\": 1000,\n    \"type\": [\n      \"Bug\"\n    ],\n    \"__v\": 0\n  }",
+            "form": []
+        },
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }, {
+            "type": "json-query",
+            "custom": "json.errMsg",
+            "action": "equal",
+            "value": "Error : this pokemon id is not exist"
+        }]
+    }, {
+        "_id": "8431cce0-4f0e-4792-a2bd-c496d219ce33",
+        "colId": "c8a0da72-668c-411c-b8b3-d2b948c9883e",
+        "containerId": "",
+        "name": "pokemon ",
+        "url": "{{URL}}pokemon/1000",
+        "method": "PUT",
+        "sortNum": 60000,
+        "created": "2022-10-10T04:24:44.079Z",
+        "modified": "2022-10-10T06:23:45.129Z",
+        "headers": [],
+        "params": [],
+        "body": {
+            "type": "json",
+            "raw": "{\n    \"name\": {\n      \"english\": \"test\",\n      \"japanese\": \"test\",\n      \"chinese\": \"test\",\n      \"french\": \"test\"\n    },\n    \"base\": {\n      \"HP\": 60,\n      \"Attack\": 20,\n      \"Defense\": 55,\n      \"Speed\": 30,\n      \"Speed Attack\": 25,\n      \"Speed Defense\": 25\n    },\n    \n    \"id\": 1000,\n    \"type\": [\n      \"Fire\"\n    ],\n    \"__v\": 0\n  }\n",
+            "form": []
+        },
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }, {
+            "type": "json-query",
+            "custom": "json.msg",
+            "action": "equal",
+            "value": "Updated or created Successfully"
+        }]
+    }, {
+        "_id": "94520ee1-f469-4a88-bb5f-b316d1bd749f",
+        "colId": "c8a0da72-668c-411c-b8b3-d2b948c9883e",
+        "containerId": "",
+        "name": "pokemon  validation",
+        "url": "{{URL}}pokemon/1000",
+        "method": "PUT",
+        "sortNum": 62500,
+        "created": "2022-10-10T04:24:44.080Z",
+        "modified": "2022-10-10T05:07:40.252Z",
+        "headers": [],
+        "params": [],
+        "body": {
+            "type": "json",
+            "raw": "{\n    \"name\": {\n      \"english\": \"test\",\n      \"japanese\": \"test\",\n      \"chinese\": \"test\",\n      \"french\": \"test\"\n    },\n    \"base\": {\n      \"HP\": \"sjhfsjh\",\n      \"Attack\": 20,\n      \"Defense\": 55,\n      \"Speed\": 30,\n      \"Speed Attack\": 25,\n      \"Speed Defense\": 25\n    },\n    \n    \"id\": 1000,\n    \"type\": [\n      \"Bug\"\n    ],\n    \"__v\": 0\n  }",
+            "form": []
+        },
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }, {
+            "type": "json-query",
+            "custom": "json.errMsg",
+            "action": "equal",
+            "value": "Invalid value"
+        }]
+    }, {
+        "_id": "805ca8b0-aa86-42de-b883-aaa8ccb9a9bd",
+        "colId": "c8a0da72-668c-411c-b8b3-d2b948c9883e",
+        "containerId": "",
+        "name": "pokemon  upsert",
+        "url": "{{URL}}pokemon/1000",
+        "method": "PUT",
+        "sortNum": 65000,
+        "created": "2022-10-10T04:24:44.081Z",
+        "modified": "2022-10-10T05:35:40.676Z",
+        "headers": [],
+        "params": [],
+        "body": {
+            "type": "json",
+            "raw": "{\n    \"name\": {\n      \"english\": \"test\",\n      \"japanese\": \"test\",\n      \"chinese\": \"test\",\n      \"french\": \"test\"\n    },\n    \"base\": {\n      \"HP\": 6011,\n      \"Attack\": 20,\n      \"Defense\": 55,\n      \"Speed\": 30,\n      \"Speed Attack\": 25,\n      \"Speed Defense\": 25\n    },\n    \n    \"id\": 1000,\n    \"type\": [\n      \"Bug\"\n    ],\n    \"__v\": 0\n  }",
+            "form": []
+        },
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }, {
+            "type": "json-query",
+            "custom": "json.msg",
+            "action": "equal",
+            "value": "Updated or created Successfully"
+        }]
+    }, {
+        "_id": "07da077a-901d-48f7-879d-cc92e3eea03e",
+        "colId": "c8a0da72-668c-411c-b8b3-d2b948c9883e",
+        "containerId": "",
+        "name": "pokemon  patch",
+        "url": "{{URL}}pokemon/1000",
+        "method": "PATCH",
+        "sortNum": 67500,
+        "created": "2022-10-10T04:24:44.082Z",
+        "modified": "2022-10-10T06:31:42.446Z",
+        "headers": [],
+        "params": [],
+        "body": {
+            "type": "json",
+            "raw": "{\n    \"base\": {\n      \"HP\": 6611111,\n      \"Attack\": 20,\n      \"Defense\": 55,\n      \"Speed\": 30,\n      \"Speed Attack\": 25,\n      \"Speed Defense\": 25\n    }\n  }",
+            "form": []
+        },
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }, {
+            "type": "json-query",
+            "custom": "json.msg",
+            "action": "equal",
+            "value": "Udtated Successfully"
+        }]
+    }, {
+        "_id": "10776862-3025-41b4-bb83-fd57d61f0154",
+        "colId": "c8a0da72-668c-411c-b8b3-d2b948c9883e",
+        "containerId": "",
+        "name": "pokemon patch Dangerous",
+        "url": "{{URL}}pokemon/1000",
+        "method": "PATCH",
+        "sortNum": 68750,
+        "created": "2022-10-10T04:24:44.083Z",
+        "modified": "2022-10-10T04:24:44.083Z",
+        "headers": [],
+        "params": [],
+        "body": {
+            "type": "json",
+            "raw": "{\n    \"base\": {\n      \"HP\": 66,\n      \"Attack\": 20,\n      \"Defense\": 55,\n      \"Speed\": 30,\n      \"Speed Attack\": 25,\n      \"Speed Defense\": 25\n    }\n  }",
+            "form": []
+        },
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }]
+    }, {
+        "_id": "829b7e08-a898-469f-aee8-906c44e66e77",
+        "colId": "c8a0da72-668c-411c-b8b3-d2b948c9883e",
+        "containerId": "",
+        "name": "Improper Route",
+        "url": "{{URL}}pokemooooons/?count=2&after=10",
+        "method": "GET",
+        "sortNum": 70000,
+        "created": "2022-10-10T04:24:44.084Z",
+        "modified": "2022-10-10T05:11:01.603Z",
+        "headers": [],
+        "params": [{
+            "name": "count",
+            "value": "2",
+            "isPath": false
+        }, {
+            "name": "after",
+            "value": "10",
+            "isPath": false
+        }],
+        "tests": [{
+            "type": "res-body",
+            "custom": "",
+            "action": "isjson",
+            "value": "true"
+        }, {
+            "type": "json-query",
+            "custom": "json.msg",
+            "action": "equal",
+            "value": "Error : Improper route"
+        }]
+    }],
+    "settings": {}
+}
