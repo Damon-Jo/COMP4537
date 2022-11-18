@@ -8,8 +8,8 @@ function page({ currentPokemons, currentPage }) {
         Page number {currentPage}
       </h1>
       {
-        currentPokemons.map(item => {
-          return <div>  {item.name.english} id is {item.id} </div>
+        currentPokemons.map(currentPokemon => {
+          return <div>  {currentPokemon.name.english} id is {currentPokemon.id} </div>
         })
       }
     </div>
