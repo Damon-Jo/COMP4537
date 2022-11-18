@@ -1,6 +1,7 @@
 import React from 'react'
+import { useState } from 'react'
 
-function pagination({ numberOfPages, currentPage, setCurrentPage }) {
+function Pagination({ numberOfPages, currentPage, setCurrentPage }) {
   const pageNumbers = []
   for (let i = 1; i <= numberOfPages; i++) {
     pageNumbers.push(i)
@@ -9,9 +10,12 @@ function pagination({ numberOfPages, currentPage, setCurrentPage }) {
     if (currentPage !== numberOfPages) setCurrentPage(currentPage + 1)
   }
   const prevPage = () => {
+    console.log(currentPage)
     if (currentPage !== 1) setCurrentPage(currentPage - 1)
+    
+    if(currentPage - 1 === 1) setPreBtnActive(false)
   }
-//   let [btnActive, setBtnActive] = useState("");
+  let [preBtnActive, setPreBtnActive] = useState(false);
 
 //   const toggleActive = (e) => {
 //     setBtnActive((prev) => {
@@ -19,15 +23,28 @@ function pagination({ numberOfPages, currentPage, setCurrentPage }) {
 //     });
 //   };
 
+const isFirstPage = (index)=>{
+  var pageNumber = index + 1;
+  if(pageNumber === 1){
+    setPreBtnActive(false);
+  } else {
+    setPreBtnActive(true);
+  }
+}
 
   return (
     <div>
-      <button onClick={prevPage}>prev </button>
+      {
+        preBtnActive == true ? <button onClick={prevPage}>prev </button> : null
+      }
+
+
+      {/* <button onClick={prevPage}>prev </button> */}
 
       {
-        pageNumbers.map(number => {
+        pageNumbers.map((number, i) => {
           return (<>
-            <button style={{background:'' }} onClick={() => setCurrentPage(number)}>
+            <button style={{background:'' }} onClick={() => [setCurrentPage(number), isFirstPage(i)]}>
               {number}
             </button>
           </>)
@@ -41,4 +58,4 @@ function pagination({ numberOfPages, currentPage, setCurrentPage }) {
   )
 }
 
-export default pagination
+export default Pagination
