@@ -15,8 +15,8 @@ function Pagination({ numberOfPages, currentPage, setCurrentPage }) {
     
     if(currentPage - 1 === 1) setPreBtnActive(false)
   }
-  let [preBtnActive, setPreBtnActive] = useState(false);
-
+let [preBtnActive, setPreBtnActive] = useState(false);
+let [nextBtnActive, setNextBtnActive] = useState(true);
 //   const toggleActive = (e) => {
 //     setBtnActive((prev) => {
 //       return e.target.value;
@@ -32,6 +32,17 @@ const isFirstPage = (index)=>{
   }
 }
 
+const isLastPage = (index)=>{
+  var pageNumber = index + 1;
+  if(pageNumber === numberOfPages){
+    setNextBtnActive(false);
+  } else {
+    setNextBtnActive(true);
+  }
+}
+
+
+
   return (
     <div>
       {
@@ -44,16 +55,15 @@ const isFirstPage = (index)=>{
       {
         pageNumbers.map((number, i) => {
           return (<>
-            <button style={{background:'' }} onClick={() => [setCurrentPage(number), isFirstPage(i)]}>
+            <button style={{background:'' }} onClick={() => [setCurrentPage(number), isFirstPage(i), isLastPage(i)]}>
               {number}
             </button>
           </>)
         })
       }
-
-      <button  onClick={nextPage}>
-        next
-      </button>
+      {
+        nextBtnActive == true ? <button  onClick={nextPage}>next</button> : null
+      }
     </div>
   )
 }
