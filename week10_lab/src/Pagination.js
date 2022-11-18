@@ -3,8 +3,8 @@ import { useState } from 'react'
 
 function Pagination({ numberOfPages, currentPage, setCurrentPage }) {
   const pageNumbers = []
-  for (let i = 1; i <= numberOfPages; i++) {
-    pageNumbers.push(i)
+  for (let index = 1; index <= numberOfPages; index++) {
+    pageNumbers.push(index)
   }
   const nextPage = () => {
     if (currentPage !== numberOfPages) setCurrentPage(currentPage + 1)
@@ -12,16 +12,11 @@ function Pagination({ numberOfPages, currentPage, setCurrentPage }) {
   const prevPage = () => {
     console.log(currentPage)
     if (currentPage !== 1) setCurrentPage(currentPage - 1)
-    
     if(currentPage - 1 === 1) setPreBtnActive(false)
   }
+
 let [preBtnActive, setPreBtnActive] = useState(false);
 let [nextBtnActive, setNextBtnActive] = useState(true);
-//   const toggleActive = (e) => {
-//     setBtnActive((prev) => {
-//       return e.target.value;
-//     });
-//   };
 
 const isFirstPage = (index)=>{
   var pageNumber = index + 1;
