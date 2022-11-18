@@ -10,7 +10,6 @@ function Pagination({ numberOfPages, currentPage, setCurrentPage }) {
   const nextPage = () => {
     toggleActive(currentPage)
     if (currentPage !== numberOfPages) setCurrentPage(currentPage + 1)
-
     if(currentPage + 1 === numberOfPages) setNextBtnActive(false)
   }
   const prevPage = () => {
@@ -49,11 +48,6 @@ const toggleActive = (e) => {
   });
 };
 
-// const [active, setActive] = useState(false);
-// const handleClick = (page) => {
-
-//   setActive(!active);
-// };
   return (
     <div>
       {

@@ -18,8 +18,8 @@ function App() {
       .catch(err => console.log("err", err))
   }, [])
 
-  const indexOfLastRecord = currentPage * pokemonsPerPage;
-  const indexOfFirstRecord = indexOfLastRecord - pokemonsPerPage;
+  const indexOfLastRecord = currentPage * pokemonsPerPage;  // 1 * 10
+  const indexOfFirstRecord = indexOfLastRecord - pokemonsPerPage; // 10 - 10
   const currentPokemons = pokemons.slice(indexOfFirstRecord, indexOfLastRecord)
   const numberOfPages = Math.ceil(pokemons.length / pokemonsPerPage);  
   return (
