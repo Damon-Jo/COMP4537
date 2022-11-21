@@ -1,5 +1,6 @@
 
 import React from 'react'
+import Pokemon from './Pokemon'
 
 function page({ currentPokemons, currentPage }) {
   return (
@@ -7,11 +8,14 @@ function page({ currentPokemons, currentPage }) {
       <h1>
         Page number {currentPage}
       </h1>
-      {
-        currentPokemons.map(currentPokemon => {
-          return <div>  {currentPokemon.name.english} id is {currentPokemon.id} </div>
-        })
-      }
+      <div className="pokemon-list">
+        {
+          currentPokemons.map(currentPokemon => {
+            return <pokemon pokemon={currentPokemon} />
+          })
+        }
+      </div>
+      
     </div>
   )
 }
