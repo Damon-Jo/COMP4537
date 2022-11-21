@@ -15,3 +15,14 @@ code {
 button {
   display: inline-block;
 }
+
+.pokemon-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pokemon-list img {
+  width: 100px;
+  height: 100px;
+}
