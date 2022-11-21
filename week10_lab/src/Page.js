@@ -11,7 +11,7 @@ function page({ currentPokemons, currentPage }) {
       <div className="pokemon-list">
         {
           currentPokemons.map(currentPokemon => {
-            return <pokemon pokemon={currentPokemon} />
+            return <Pokemon pokemon={currentPokemon} />
           })
         }
       </div>
