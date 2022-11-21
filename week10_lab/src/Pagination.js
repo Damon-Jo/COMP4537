@@ -55,17 +55,18 @@ const toggleActive = (e) => {
       }
       {
         pageNumbers.map((number, i) => {
-          return (
-          <>
-            <button
-             
-              value={i}
-              className={(i == btnActive ? "active" : "")}
-              onClick={() => [toggleActive(i), setCurrentPage(number), isFirstPage(i), isLastPage(i)]}
-              >
-              {number}
-            </button>
-          </>)
+          if (number < currentPage + 6 && number > currentPage - 6)
+            return (
+            <>
+              <button
+              
+                value={i}
+                className={(i == btnActive ? "active" : "")}
+                onClick={() => [toggleActive(i), setCurrentPage(number), isFirstPage(i), isLastPage(i)]}
+                >
+                {number}
+              </button>
+            </>)
         })
       }
       {
