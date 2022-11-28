@@ -1,7 +1,7 @@
 import React from "react";
 
 function Search({ types, checkedState, setCheckedState }) {
-  const handleChange = (type) => {
+  const onChangeHandle = (type) => {
     const index = types.current.indexOf(type);
     console.log(index);
     const newCheckedState = checkedState.map((item, i) =>
@@ -26,6 +26,7 @@ function Search({ types, checkedState, setCheckedState }) {
               }}
             />
             <label htmlFor={type}>{type}</label>
+            <br />
           </span>
         );
       })}
