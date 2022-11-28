@@ -1,16 +1,36 @@
-import React from 'react'
+import React from "react";
 
-function Search() {
+function Search({ types, checkedState, setCheckedState }) {
+  const handleChange = (type) => {
+    const index = types.current.indexOf(type);
+    console.log(index);
+    const newCheckedState = checkedState.map((item, i) =>
+      i === index ? !item : item
+    );
+    setCheckedState(newCheckedState);
+  };
+
   return (
     <div>
-        <span>
-            <input type='checkbox'/>
-            <label>type</label>
-
-        </span>
-
+      {types.current.map((type) => {
+        return (
+          <span>
+            {/*  match input and labe : input > id == label > htmlFor */}
+            <input
+              type="checkbox"
+              name="pokeTypes"
+              value={type}
+              id={type}
+              onChange={() => {
+                onChangeHandle(type);
+              }}
+            />
+            <label htmlFor={type}>{type}</label>
+          </span>
+        );
+      })}
     </div>
-  )
+  );
 }
 
-export default Search
+export default Search;

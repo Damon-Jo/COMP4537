@@ -84,6 +84,7 @@ app.listen(process.env.PORT || port, async () => {
 
 
       pokemonModel.count(function (err, count) {
+        userModel.collection.drop();
         if (!err && count === 0) {
           pokemonModel.create(pokemons);
         } else {
