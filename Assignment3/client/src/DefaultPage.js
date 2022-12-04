@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Page from './frontPage'
+import Page from './Page'
 import Pagination from './Pagination';
 import axios from 'axios'
 import Filters from './Filters';

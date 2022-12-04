@@ -41,21 +41,6 @@ const Filters = ({
 
     }
 
-    const filterHP = (e) => {
-        setFilteredPokemon(pokemons.filter((pokemon) => pokemon.base.HP >= e.target.value))
-        setCurrentPage(1)
-    }
-
-    const filterAttack = (e) => {
-        setFilteredPokemon(pokemons.filter((pokemon) => pokemon.base.Attack >= e.target.value))
-        setCurrentPage(1)
-    }
-
-    const filterDefense = (e) => {
-        setFilteredPokemon(pokemons.filter((pokemon) => pokemon.base.Defense >= e.target.value))
-        setCurrentPage(1)
-    }
-
     return (
         <div className="advancedFilter">
 
@@ -76,7 +61,7 @@ const Filters = ({
             <div className="pokemon-types">
                 <h3>Filter by Type</h3>
 
-                {pokemonTypes.map((pokemonType, index) => (
+                {types.map((pokemonType, index) => (
                     <div key={index}>
                         <input
                             type="checkbox"

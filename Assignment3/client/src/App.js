@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Login from './Login'
-import Pokemonpage from './Pokemonpage'
+import DefaultPage from './DefaultPage'
 import Report from './Report';
 import Dashboard from './Dashboard';
 
