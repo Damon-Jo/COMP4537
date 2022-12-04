@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Login from './Login'
-import Pokemon from './Pokemon'
+import Pokemonpage from './Pokemonpage'
 import Report from './Report';
 import Dashboard from './Dashboard';
 
@@ -16,7 +16,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Pokemon />} />
+          <Route path='/' element={<DefaultPage />} />
           <Route path="/adminlogin" element={<Login setUsername={setUsername} setPassword={setPassword} user={user} setUser={setUser} setAccessToken={setAccessToken} setRefreshToken={setRefreshToken} />} />
           <Route path='/dashboard' element={<Dashboard accessToken={accessToken} setAccessToken={setAccessToken} refreshToken={refreshToken} />} />
           <Route path="/report/1" element={<Report id={1} accessToken={accessToken} setAccessToken={setAccessToken} refreshToken={refreshToken} />} />

@@ -8,6 +8,7 @@ function Login() {
   const [user, setUser] = useState({});
   const [accessToken, setAccessToken] = useState('');
   const [refreshToken, setRefreshToken] = useState('');
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -17,6 +18,8 @@ function Login() {
       setRefreshToken(res.headers['auth-token-refresh']);
     } catch (err) {
       console.log(err);
+    }finally {
+      navigate('/dashboard');
     }
   }
 
