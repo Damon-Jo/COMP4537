@@ -1,12 +1,12 @@
 function PokeImage(props) {
 
     const img_style = {
-        width: "200px",
+        width: "150px",
+        height: "150px",
         display: "block",
         marginLeft: "auto",
         marginRight: "auto"
     }
-
 
     return (
         <>
