@@ -1,14 +1,7 @@
 import React from "react";
 
-const Filters = ({
-    pokemons,
-    types,
-    selectedTypes,
-    setSelectedTypes,
-    setCurrentPage,
-    setFilteredPokemon
-}) => {
-    const handleCheckBox = (e) => {
+const Filters = ({pokemons, types, selectedTypes, setSelectedTypes, setCurrentPage, setFilteredPokemon}) => {
+    const handlerForSearchingType = (e) => {
         var localSelectedTypes = selectedTypes;
         if (selectedTypes.includes(e.target.value)) {
             localSelectedTypes.splice(localSelectedTypes.indexOf(e.target.value), 1)
@@ -21,7 +14,7 @@ const Filters = ({
         setCurrentPage(1)
     };
 
-    const handleNameSearch = (e) => {
+    const handlerForSearchingName = (e) => {
         if (document.getElementById("english").checked) {
             setFilteredPokemon(pokemons.filter((pokemon) => pokemon.name.english.toLowerCase().includes(e.target.value.toLowerCase())))
         }
@@ -34,11 +27,9 @@ const Filters = ({
         else if (document.getElementById("french").checked) {
             setFilteredPokemon(pokemons.filter((pokemon) => pokemon.name.french.toLowerCase().includes(e.target.value.toLowerCase())))
         } else {
-            // default english search   
             setFilteredPokemon(pokemons.filter((pokemon) => pokemon.name.english.toLowerCase().includes(e.target.value.toLowerCase())))
         }
         setCurrentPage(1)
-
     }
 
     return (
@@ -47,7 +38,7 @@ const Filters = ({
             <div style={{border: '2px solid black', padding:'10px'}}>
 
                 <h3>Filter by Name</h3>
-                <input type="text" placeholder="Search by name" onChange={handleNameSearch} />
+                <input type="text" placeholder="Search by name" onChange={handlerForSearchingName} />
                 <input type="radio" id="english" name="fav_language" value="english"></input>
                 <label for="English">English</label>
 
@@ -69,7 +60,7 @@ const Filters = ({
                         <input
                             type="checkbox"
                             id={"pokemon-" + pokemonType}
-                            onChange={handleCheckBox}
+                            onChange={handlerForSearchingType}
                             value={pokemonType}
                         />
                         <label htmlFor={"pokemon-" + pokemonType}>{pokemonType}</label>

@@ -1,6 +1,5 @@
 import React from 'react'
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import PokemonImage from './PokemonImage'
 
@@ -10,6 +9,7 @@ function Pokemon(props) {
     if (id < 100) return `0${id}`
     return id
   }
+
   const style = {
     position: 'absolute',
     top: '50%',
@@ -17,9 +17,10 @@ function Pokemon(props) {
     transform: 'translate(-50%, -50%)',
     width: 500,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 20,
-    p: 6,
+    border: '1px solid #000',
+    boxShadow: 24,
+    p: 4,
+    fontSize: 30,
   };
 
   const [open, setOpen] = React.useState(false);
@@ -30,34 +31,21 @@ function Pokemon(props) {
     <>
     <div>
       <PokemonImage id={getThreeDigitId(props.pokemon.id)} handleOpen={handleOpen}/>
-      {/* <img src={`https://github.com/fanzeyi/pokemon.json/raw/master/images/${getThreeDigitId(props.pokemon.id)}.png`} /> */}
-      <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
+      <Modal open={open} onClose={handleClose}>
                 <Box sx={style}>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                        {props.pokemon.name.english}
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        HP: [{props.pokemon.base.HP}]
-                        <br/>
-                        Attack: [{props.pokemon.base.Attack}]
-                        <br/>
-                        Defense: [{props.pokemon.base.Defense}]
-                        <br/>
-                        Sp. Attack: [{props.pokemon.base['Sp. Attack']}]
-                        <br/>
-                        Speed: [{props.pokemon.base.Speed}]
-                        <br/>
-                        Types: [
+                    <div style={{fontWeight: 'bold'}}>Pokemon name : {props.pokemon.name.english}</div>
+                    <div style={{fontSize: 20}}>
+                      HP: [{props.pokemon.base.HP}]<br/>
+                      Attack: [{props.pokemon.base.Attack}]<br/>
+                      Defense: [{props.pokemon.base.Defense}]<br/>
+                      Sp. Attack: [{props.pokemon.base['Sp. Attack']}]<br/>
+                      Speed: [{props.pokemon.base.Speed}]<br/>
+                      Types: [
                         {props.pokemon.type.map(item => {
                             return <> {item}, </>
                         })}
                         ] <br/>
-                    </Typography>
+                    </div>
                 </Box>
             </Modal>
             </div>

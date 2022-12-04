@@ -49,10 +49,6 @@ const jwt = require("jsonwebtoken")
 // const { findOne } = require("./userModel.js")
 const userModel = require("./userModel.js")
 
-
-
-
-
 // app.use(morgan("tiny"))
 app.use(morgan(":method"))
 
