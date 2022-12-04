@@ -3,6 +3,7 @@ import Page from './Page'
 import Pagination from './Pagination';
 import axios from 'axios'
 import Filters from './Filters';
+import {Button} from 'react-bootstrap';
 
 function DefaultPage() {
   const [pokemons, setPokemons] = useState([]);
@@ -17,7 +18,7 @@ function DefaultPage() {
   }, [pokemons]
   );
 
-  // Get Pokemon types from pokemon
+  // pokemon types
   const types = ['Grass', 'Poison', 'Fire', 'Flying', 'Water', 'Bug', 'Normal', 'Electric', 'Ground', 'Fairy', 'Fighting', 'Psychic', 'Rock', 'Steel', 'Ice', 'Ghost', 'Dragon', 'Dark']
 
   useEffect(() => {
@@ -33,21 +34,26 @@ function DefaultPage() {
       console.log("error", error)
       setPokemons(localStorage.getItem('pokemons'))
     }
-  }, [])
-
-  const jumpToAdminLogin = () => {
-    window.location.href = "/adminLogin"
-    }
-    
+  }, [])  
 
   const indexOfLastRecord = currentPage * pokemonsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - pokemonsPerPage;
   const currentPokemons = filteredPokemons.slice(indexOfFirstRecord, indexOfLastRecord)
   const numberOfPages = Math.ceil(filteredPokemons.length / pokemonsPerPage);
 
+  const MoveLogin = () => {
+    window.location.href = "/adminLogin"
+    }
+
   return (
     <>
-    <button onClick={jumpToAdminLogin}>Login As Administrator</button>
+  
+    <button 
+      style={{ fontSize: "30",textAlign:"center", width: "20%", height: "50px",  alignItems: 'center',}}
+      onClick={MoveLogin}>
+        Click to login as Admin
+    </button>
+
       < Filters
         setCurrentPage={setCurrentPage}
         pokemons={pokemons}
@@ -56,14 +62,9 @@ function DefaultPage() {
         selectedTypes={selectedTypes}
         types={types}
       />
-      < Page
-        currentPokemons={currentPokemons}
-        currentPage={currentPage}
+      < Page currentPokemons={currentPokemons} currentPage={currentPage}
       />
-      < Pagination
-        numberOfPages={numberOfPages}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
+      < Pagination numberOfPages={numberOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage}
       />
     </>
   )
