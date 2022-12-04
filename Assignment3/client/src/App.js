@@ -17,7 +17,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<DefaultPage />} />
-          <Route path="/adminlogin" element={<Login setUsername={setUsername} setPassword={setPassword} user={user} setUser={setUser} setAccessToken={setAccessToken} setRefreshToken={setRefreshToken} />} />
+          <Route path="/login" element={<Login setUsername={setUsername} setPassword={setPassword} user={user} setUser={setUser} setAccessToken={setAccessToken} setRefreshToken={setRefreshToken} />} />
           <Route path='/dashboard' element={<Dashboard accessToken={accessToken} setAccessToken={setAccessToken} refreshToken={refreshToken} />} />
           <Route path="/report/1" element={<Report id={1} accessToken={accessToken} setAccessToken={setAccessToken} refreshToken={refreshToken} />} />
           <Route path="/report/2" element={<Report id={2} accessToken={accessToken} setAccessToken={setAccessToken} refreshToken={refreshToken} />} />

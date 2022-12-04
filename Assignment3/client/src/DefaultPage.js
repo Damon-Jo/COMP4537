@@ -42,7 +42,7 @@ function DefaultPage() {
   const numberOfPages = Math.ceil(filteredPokemons.length / pokemonsPerPage);
 
   const MoveLogin = () => {
-    window.location.href = "/adminLogin"
+    window.location.href = "/login"
     }
 
   return (

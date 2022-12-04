@@ -42,23 +42,26 @@ const Filters = ({
     }
 
     return (
-        <div className="advancedFilter">
+        <div >
 
-            <div>
+            <div style={{border: '2px solid black', padding:'10px'}}>
+
                 <h3>Filter by Name</h3>
                 <input type="text" placeholder="Search by name" onChange={handleNameSearch} />
                 <input type="radio" id="english" name="fav_language" value="english"></input>
                 <label for="English">English</label>
+
                 <input type="radio" id="french" name="fav_language" value="french"></input>
                 <label for="French">French</label>
+
                 <input type="radio" id="japanese" name="fav_language" value="japanese"></input>
                 <label for="Japanese">Japanese</label>
-                <input type="radio" id="chinese" name="fav_language" value="chinese"></input>
-                <label for="Japanese">Chinese</label>
-            </div>
-            <hr></hr>
 
-            <div className="pokemon-types">
+                <input type="radio" id="chinese" name="fav_language" value="chinese"></input>
+                <label for="chinese">Chinese</label>
+            </div>
+
+            <div style={{border: '2px solid black', padding:'10px'}}>
                 <h3>Filter by Type</h3>
 
                 {types.map((pokemonType, index) => (
@@ -73,7 +76,6 @@ const Filters = ({
                     </div>
                 ))}
             </div>
-            <hr></hr>
         </div>
     );
 }
